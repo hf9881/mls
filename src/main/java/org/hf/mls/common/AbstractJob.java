@@ -60,11 +60,7 @@ public abstract class AbstractJob {
     }
 
     protected static String getOption(String name) {
-        if (argMapOptions.containsKey(name)) {
-            return argMapOptions.get(name);
-        } else {
-            return argMapDefault.get(name);
-        }
+        return argMapOptions.containsKey(name) ? argMapOptions.get(name) : argMapDefault.get(name);
     }
 
     protected static void logJobSuccess(String jobName){

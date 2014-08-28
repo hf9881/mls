@@ -1,0 +1,11 @@
+﻿Recommended Results Table：'Recsys_recommend_results'
+Assessment checklist table：'Recsys_evaluation_checklist'
+Statistics demonstrated table：'Recsys_statistics_results'
+
+create 'Recsys_recommend_results','target_id','item_list'
+create 'Recsys_evaluation_checklist','target_id','quota_list'
+create 'Recsys_statistics_results','target_id','keys_list','quota_mean'
+
+describe 'Recsys_recommend_results'
+describe 'Recsys_evaluation_checklist'
+describe 'Recsys_statistics_results'

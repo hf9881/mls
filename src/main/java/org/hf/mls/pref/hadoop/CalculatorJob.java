@@ -34,7 +34,7 @@ public class CalculatorJob extends AbstractJob {
     private static final String DEFAULT_SPLIT_CHAR = "\t";
 
     public static int runJobs(String[] args) throws Throwable {
-        addOption("Appid", "", true);
+
         addOption("InputDir", "", true);
         addOption("batchId", "", true);
         addOption("userIndex", "0", true);
@@ -47,7 +47,6 @@ public class CalculatorJob extends AbstractJob {
             return -1;
         }
 
-        String APP_ID = getOption("Appid");
         String inputDir = getOption("InputDir");
         String batchId = getOption("batchId");
         String userIndex = getOption("userIndex");
@@ -70,8 +69,8 @@ public class CalculatorJob extends AbstractJob {
         String entropyPrePath = dir + "/entropy/";
         String stdDeviationPrePath = dir + "/stdDev/";
 
-        String prefOutputDir = APP_ID + "." + Utils.TABLE_RECOMMEND_RESULTS;
-        String staticDir = APP_ID + "." + Utils.TABLE_STATISTICS_RESULTS;
+        String prefOutputDir = Utils.TABLE_RECOMMEND_RESULTS;
+        String staticDir = Utils.TABLE_STATISTICS_RESULTS;
 
         int pc = Integer.parseInt(prefsCount);
         int percent = 0;

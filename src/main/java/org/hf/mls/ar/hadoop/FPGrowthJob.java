@@ -30,7 +30,6 @@ public class FPGrowthJob extends AbstractJob {
 
     public static int runJobs(String[] args) throws Throwable {
 
-        addOption("Appid", "", true);
         addOption("InputDir", "", true);
         addOption("batchId", "-1", true);
         addOption("userIndex", "0", true);
@@ -44,7 +43,6 @@ public class FPGrowthJob extends AbstractJob {
             return -1;
         }
 
-        String APP_ID = getOption("Appid");
         String inputDir = getOption("InputDir");
         String batchId = getOption("batchId");
         String userIndex = getOption("userIndex");
@@ -63,15 +61,15 @@ public class FPGrowthJob extends AbstractJob {
         String countDir = dir + "/tmp";
         String arDir = dir + "/ar";
         String mahoutTempDir = dir + "/mahoutTmpDir";
-        String arOutputDir = APP_ID + "." + Utils.TABLE_RECOMMEND_RESULTS;
+        String arOutputDir =  Utils.TABLE_RECOMMEND_RESULTS;
 
         String evlOutputDir = dir + "/Evaluate";
         String preStaticOutputDir = dir + "/PreStatistics";
 
-        String evalDir = APP_ID + "." + Utils.TABLE_EVALUATION_CHECKLIST;
+        String evalDir =  Utils.TABLE_EVALUATION_CHECKLIST;
         String staticOutputDir = dir + "/Statistics";
 
-        String staticDir = APP_ID + "." + Utils.TABLE_STATISTICS_RESULTS;
+        String staticDir = Utils.TABLE_STATISTICS_RESULTS;
 
         if (!Utils.rmHdfsDir(dir)) {
             return -1;

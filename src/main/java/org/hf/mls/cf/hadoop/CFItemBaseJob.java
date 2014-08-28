@@ -51,7 +51,7 @@ public class CFItemBaseJob extends AbstractJob {
     private static final Logger LOGGER = LoggerFactory.getLogger(CfDriver.class);
 
     public static int runJobs(String[] args) throws Throwable {
-        addOption("Appid", "", true);
+    	
         addOption("InputDir", "", true);
         addOption("batchId", "-1", true);
         addOption("userIndex", "0", true);
@@ -76,7 +76,6 @@ public class CFItemBaseJob extends AbstractJob {
             return -1;
         }
 
-        String APP_ID = getOption("Appid");
         String inputDir = getOption("InputDir");
         String batchId = getOption("batchId");
         String userIndex = getOption("userIndex");
@@ -125,7 +124,7 @@ public class CFItemBaseJob extends AbstractJob {
         String preDir = dir + "/pre";//pre job output dir
 
         String cfDir = dir + "/cf";//mahout cf out put dir
-        String cfResultTable = APP_ID + "." + Utils.TABLE_RECOMMEND_RESULTS;
+        String cfResultTable = Utils.TABLE_RECOMMEND_RESULTS;
 
         String trainAndTestSetDir = dir + "/ttSet";
         String testSet = "testSet/testSet";
@@ -139,10 +138,10 @@ public class CFItemBaseJob extends AbstractJob {
         String nrsDir = dir + "/Nrs";//the number of items which both system recommended and user liked
 
         String evlOutputDir = dir + "/Evaluate";
-        String evalListTable = APP_ID + "." + Utils.TABLE_EVALUATION_CHECKLIST;
+        String evalListTable = Utils.TABLE_EVALUATION_CHECKLIST;
 
         String preStaticDir = dir + "/PreStatistics";
-        String staticInfoTable = APP_ID + "." + Utils.TABLE_STATISTICS_RESULTS;
+        String staticInfoTable = Utils.TABLE_STATISTICS_RESULTS;
 
         String inputPath = "";
 

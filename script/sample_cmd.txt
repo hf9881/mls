@@ -1,0 +1,5 @@
+﻿/home/hadoop/ar.sh --InputDir /test/hf/input --batchId a01 --userIndex  0  --itemIndex 3 --splitChar \\t
+
+/home/hadoop/cf.sh  --InputDir /test/hf/input --batchId c01  --userIndex 0 --itemIndex 3 --splitChar \\t --similarityClass SIMILARITY_COOCCURRENCE --numRecommendations 11 --maxSimilaritiesPerItem 80 --maxPrefsPerUserInItemSimilarity 500 --maxPrefsPerUser 500 --minPrefsPerUser 1 --threshold 0  --userIdNan true --itemIdNan true --trainPercent 0.6 --optLevel 0  --booleanData true --prefValueIndex 0
+
+/home/hadoop/pref.sh --InputDir /test/hf/input  --batchId  p01 --userIndex 0 --itemIndex 1  --prefsIndexes 2-3-4 --splitChar \\t

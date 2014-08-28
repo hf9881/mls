@@ -96,16 +96,6 @@ public class RowSimilarityJob extends AbstractJob {
             return null;
         }
 
-//        int numberOfColumns;
-//
-//        if (hasOption("numberOfColumns")) {
-//            // Number of columns explicitly specified via CLI
-//            numberOfColumns = Integer.parseInt(getOption("numberOfColumns"));
-//        } else {
-//            // else get the number of columns by determining the cardinality of a vector in the input matrix
-//            numberOfColumns = getDimensions(getInputPath());
-//        }
-
         String similarityClassnameArg = getOption("similarityClassname");
         String similarityClassname;
         try {
@@ -164,7 +154,6 @@ public class RowSimilarityJob extends AbstractJob {
             pairwiseConf.set(SIMILARITY_CLASSNAME, similarityClassname);
             //add prePath
             pairwiseConf.set("prepPath", getInputPath().toString());
-            //pairwiseConf.setInt(NUMBER_OF_COLUMNS, numberOfColumns);
             pairwiseConf.setBoolean(EXCLUDE_SELF_SIMILARITY, excludeSelfSimilarity);
             /**
              * depending on normsAndTranspose job
@@ -379,7 +368,6 @@ public class RowSimilarityJob extends AbstractJob {
             if (numberOfColumns == -1) {
                 numberOfColumns = (int) HadoopUtil.countRecords(new Path(prepPath, "userVectors"), PathType.LIST, null, ctx.getConfiguration());
             }
-            //numberOfColumns = ctx.getConfiguration().getInt(NUMBER_OF_COLUMNS, -1);
             Preconditions.checkArgument(numberOfColumns > 0, "Number of columns must be greater then 0! But numberOfColumns = " + numberOfColumns);
             excludeSelfSimilarity = ctx.getConfiguration().getBoolean(EXCLUDE_SELF_SIMILARITY, false);
             norms = Vectors.read(new Path(ctx.getConfiguration().get(NORMS_PATH)), ctx.getConfiguration());

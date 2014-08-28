@@ -164,16 +164,6 @@ public final class RecommenderJob extends AbstractJob {
         ControlledJob cAggregateAndRecommend = null;
 
         if (shouldRunNextPhase(parsedArgs, currentPhase)) {
-            /**
-             *old code: ToolRunner.run(getConf(),
-             *           new PreparePreferenceMatrixJob(),
-             *           new String[]{"--input", getInputPath().toString(),
-             *           "--output", prepPath.toString(), "--maxPrefsPerUser",
-             *           String.valueOf(maxPrefsPerUserInItemSimilarity),
-             *           "--minPrefsPerUser", String.valueOf(minPrefsPerUser),
-             *           "--booleanData", String.valueOf(booleanData), "--tempDir", getTempPath().toString()});
-             *           numberOfUsers = HadoopUtil.readInt(new Path(prepPath, "numUsers.bin"), getConf());
-             */
             PreparePreferenceMatrixJob ppmcj = new PreparePreferenceMatrixJob();
             preparePreferenceMatrixJobs = ppmcj.getJobs(new String[]{"--input", getInputPath().toString(),
                     "--output", prepPath.toString(), "--maxPrefsPerUser", String.valueOf(maxPrefsPerUserInItemSimilarity),
@@ -183,13 +173,6 @@ public final class RecommenderJob extends AbstractJob {
         }
 
         if (shouldRunNextPhase(parsedArgs, currentPhase)) {
-            /**
-             *old code:
-             *if (numberOfUsers == -1) {
-             * numberOfUsers = (int) HadoopUtil.countRecords(new Path(prepPath, "userVectors"), PathType.LIST, null, getConf());
-             * }
-             * ToolRunner.run(getConf(), new RowSimilarityJob(), new String[]{"--input", new Path(prepPath, "ratingMatrix").toString(), "--output", similarityMatrixPath.toString(), "--numberOfColumns", String.valueOf(numberOfUsers), "--similarityClassname", similarityClassname, "--maxSimilaritiesPerRow", String.valueOf(maxSimilaritiesPerItem), "--excludeSelfSimilarity", String.valueOf(Boolean.TRUE), "--threshold", String.valueOf(threshold), "--tempDir", getTempPath().toString()});
-             */
             RowSimilarityJob rsj = new RowSimilarityJob();
             rowSimilarityJobs = rsj.getJobs(new String[]{"--input", prepPath.toString(),
                     "--output", similarityMatrixPath.toString(), "--numberOfColumns", String.valueOf(numberOfUsers),

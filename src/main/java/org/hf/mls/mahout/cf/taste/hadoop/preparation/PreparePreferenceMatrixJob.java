@@ -104,10 +104,6 @@ public class PreparePreferenceMatrixJob extends AbstractJob {
         cJobs.put("toUserVectors", cToUserVectors);
 
         //we need the number of users later
-        //old code:
-        // int numberOfUsers = (int) toUserVectors.getCounters().findCounter(ToUserVectorsReducer.Counters.USERS).getValue();
-        //HadoopUtil.writeInt(numberOfUsers, getOutputPath(NUM_USERS), getConf());
-
         //build the rating matrix
         Job toItemVectors = prepareJob(getOutputPath(USER_VECTORS), getOutputPath(RATING_MATRIX),
                 ToItemVectorsMapper.class, IntWritable.class, VectorWritable.class, ToItemVectorsReducer.class,

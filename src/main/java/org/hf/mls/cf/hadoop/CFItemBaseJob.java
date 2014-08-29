@@ -1,6 +1,5 @@
-package org.hf.mls.cf.hadoop;
+﻿package org.hf.mls.cf.hadoop;
 
-import org.hf.mls.common.JobOptions;
 import org.hf.mls.cf.driver.CfDriver;
 import org.hf.mls.cf.hadoop.change.ChangeVectorToIntJob;
 import org.hf.mls.cf.hadoop.change.ReduceNanJob;
@@ -11,6 +10,7 @@ import org.hf.mls.cf.hadoop.tohbase.ExtractJob;
 import org.hf.mls.cf.hadoop.tohbase.SeqToHbaseJob;
 import org.hf.mls.cf.hadoop.tohbase.TextToHbaseJob;
 import org.hf.mls.common.AbstractJob;
+import org.hf.mls.common.JobOptions;
 import org.hf.mls.common.Utils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.mapreduce.lib.jobcontrol.ControlledJob;
@@ -72,7 +72,7 @@ public class CFItemBaseJob extends AbstractJob {
         addOption("tempDir", "tmp/", false);
         addOption("optLevel", String.valueOf(JobOptions.OPTIMIZE), false);
 
-        if (!parseArguments(args)) {
+        if (!parseArguments(args, "--")) {
             return -1;
         }
 

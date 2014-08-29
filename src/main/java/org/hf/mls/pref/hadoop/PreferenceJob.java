@@ -43,7 +43,7 @@ public class PreferenceJob extends AbstractJob {
         addOption("prefsIndexes", "2", true);
         addOption("tempDir", "tmp/", true);
 
-        if (!parseArguments(args)) {
+        if (!parseArguments(args, "--")) {
             return -1;
         }
 

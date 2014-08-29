@@ -1,9 +1,9 @@
 package org.hf.mls.ar.hadoop;
 
-import org.hf.mls.common.JobOptions;
 import org.hf.mls.ar.driver.ArDriver;
 import org.hf.mls.ar.hadoop.tohbase.ToHbaseJob;
 import org.hf.mls.common.AbstractJob;
+import org.hf.mls.common.JobOptions;
 import org.hf.mls.common.Utils;
 import org.hf.mls.mahout.driver.MahoutDriver;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class FPGrowthJob extends AbstractJob {
         addOption("numGroups", "800", false);
         addOption("tempDir", "tmp/", true);
 
-        if (!parseArguments(args)) {
+        if (!parseArguments(args, "--")) {
             return -1;
         }
 
@@ -61,12 +61,12 @@ public class FPGrowthJob extends AbstractJob {
         String countDir = dir + "/tmp";
         String arDir = dir + "/ar";
         String mahoutTempDir = dir + "/mahoutTmpDir";
-        String arOutputDir =  Utils.TABLE_RECOMMEND_RESULTS;
+        String arOutputDir = Utils.TABLE_RECOMMEND_RESULTS;
 
         String evlOutputDir = dir + "/Evaluate";
         String preStaticOutputDir = dir + "/PreStatistics";
 
-        String evalDir =  Utils.TABLE_EVALUATION_CHECKLIST;
+        String evalDir = Utils.TABLE_EVALUATION_CHECKLIST;
         String staticOutputDir = dir + "/Statistics";
 
         String staticDir = Utils.TABLE_STATISTICS_RESULTS;

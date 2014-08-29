@@ -20,18 +20,18 @@ public abstract class AbstractJob {
     private static List<String> argListRequired = new ArrayList<String>();
     private static Map<String, String> argMapOptions;
 
-    protected static boolean parseArguments(String[] args) {
+    protected static boolean parseArguments(String[] args, String separatorChar) {
         StringBuilder argsString;
 
         if (0 == args.length) {
-            argsString = new StringBuilder("Usage: MainClassName");
+            argsString = new StringBuilder("Usage: MainClassName ");
             for (String name : argMapDefault.keySet()) {
-                argsString.append(OptionsHelper.separatorChar).append(name).append("[] ");
+                argsString.append(separatorChar).append(name).append("[] ");
             }
             LOGGER.error(argsString.toString());
             return false;
         }
-        OptionsHelper optionHelper = new OptionsHelper(args);
+        OptionsHelper optionHelper = new OptionsHelper(args, separatorChar);
 
         argMapOptions = optionHelper.getOptionsPairs();
         if (null == argMapOptions) {
@@ -40,7 +40,11 @@ public abstract class AbstractJob {
         }
         for (String name : argListRequired) {
             if (!argMapOptions.containsKey(name)) {
-                LOGGER.error("Necessary arguments missing!");
+                StringBuilder argsb = new StringBuilder("");
+                for (String arg : argMapOptions.keySet()) {
+                    argsb.append(arg).append(" ");
+                }
+                LOGGER.error("Necessary arguments missing! Your arguments: " + argsb.toString());
                 return false;
             }
         }
@@ -48,12 +52,12 @@ public abstract class AbstractJob {
         argsString = new StringBuilder("Arguments: ");
 
         for (String name : argMapOptions.keySet()) {
-            argsString.append(OptionsHelper.separatorChar).append(name).append("[").append(argMapOptions.get(name)).append("] ");
+            argsString.append(separatorChar).append(name).append("[").append(argMapOptions.get(name)).append("] ");
         }
 
         for (String name : argMapDefault.keySet()) {
             if (!argMapOptions.containsKey(name)) {
-                argsString.append(OptionsHelper.separatorChar).append(name).append("(").append(argMapDefault.get(name)).append(") ");
+                argsString.append(separatorChar).append(name).append("(").append(argMapDefault.get(name)).append(") ");
             }
         }
         LOGGER.info(argsString.toString());

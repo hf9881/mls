@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * --stdMethodFlag
  * --hiveShellPath
  */
-public class CalculatorJob extends AbstractJob {
+public class PreferenceJob extends AbstractJob {
     private static final Logger LOGGER = LoggerFactory.getLogger(PrefDriver.class);
 
     private static final String DEFAULT_SPLIT_CHAR = "\t";

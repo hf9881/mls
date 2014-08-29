@@ -27,9 +27,6 @@ public class ExtractJob {
         Job job = new Job(conf, "CF_Extract_item_list_" + args[2]);
         job.setJarByClass(ExtractJob.class);
 
-        //job.setInputFormatClass(SequenceFileInputFormat.class);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
-
         FileInputFormat.setInputPaths(job, new Path(args[0]));
 
         TableMapReduceUtil.initTableReducerJob(args[1], null, job);

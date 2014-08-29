@@ -29,7 +29,6 @@ public class CreateDicJob {
         System.out.println("Create dic " + tag + "job started!");
         Configuration conf = new Configuration();
         conf.setInt("index", Integer.parseInt(args[3]));
-        //conf.setBoolean("ispref", args[4].equals("false"));
 
         Job job = new Job(conf, "CF_Create " + tag + " Dic_" + args[2]);
         job.setJarByClass(CreateDicJob.class);
@@ -49,7 +48,6 @@ public class CreateDicJob {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
-        //job.getCounters().findCounter("Counter", "line").setValue(0);
         return job;
     }
 

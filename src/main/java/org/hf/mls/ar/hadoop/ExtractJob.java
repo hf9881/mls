@@ -38,7 +38,6 @@ public class ExtractJob extends Configured implements Tool {
         TableMapReduceUtil.initTableReducerJob(args[1], null, job);
 
         job.setInputFormatClass(SequenceFileInputFormat.class);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         job.setMapperClass(ExtractMapper.class);
 
@@ -46,9 +45,6 @@ public class ExtractJob extends Configured implements Tool {
 
         job.setMapOutputKeyClass(ImmutableBytesWritable.class);
         job.setMapOutputValueClass(Put.class);
-
-        //job.setOutputKeyClass(Text.class);
-        //job.setOutputValueClass(Text.class);
 
         boolean success = job.waitForCompletion(true);
         if (success) {

@@ -23,18 +23,16 @@ public class CountJob extends Configured implements Tool {
         return ToolRunner.run(new Configuration(), new CountJob(), args);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int run(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        //conf.setLong("N", 0);
 
         Job job = new Job(conf, "AR_Count_" + args[2]);
         job.setJarByClass(CountJob.class);
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
-
-        //job.setInputFormatClass(SequenceFileInputFormat.class);
 
         job.setMapperClass(CountMapper.class);
 

@@ -2,12 +2,12 @@ package org.hf.mls.driver;
 
 import org.hf.mls.ar.hadoop.FPGrowthJob;
 import org.hf.mls.cf.hadoop.CFItemBaseJob;
-import org.hf.mls.pref.hadoop.CalculatorJob;
+import org.hf.mls.pref.hadoop.PreferenceJob;
 
 /**
  * Created by He Fan on 2014/7/14.
  */
-public class MLDriver {
+public class MlsDriver {
 
     /**
      *
@@ -37,8 +37,7 @@ public class MLDriver {
      * @throws Throwable
      */
     public static int runArJobs(String[] args) throws Throwable {
-        FPGrowthJob rj = new FPGrowthJob();
-        return rj.runJobs(args);
+        return FPGrowthJob.runJobs(args);
     }
 
     /**
@@ -49,8 +48,7 @@ public class MLDriver {
      */
     public static int runArJobs(String argString) throws Throwable {
         String[] args = argString.split(" ");
-        FPGrowthJob rj = new FPGrowthJob();
-        return rj.runJobs(args);
+        return FPGrowthJob.runJobs(args);
     }
 
     /**
@@ -60,7 +58,7 @@ public class MLDriver {
      * @throws Throwable
      */
     public static int runPrefJobs(String[] args) throws Throwable {
-        return CalculatorJob.runJobs(args);
+        return PreferenceJob.runJobs(args);
     }
 
     /**
@@ -71,6 +69,6 @@ public class MLDriver {
      */
     public static int runPrefJobs(String argString) throws Throwable {
         String[] args = argString.split(" ");
-        return CalculatorJob.runJobs(args);
+        return PreferenceJob.runJobs(args);
     }
 }

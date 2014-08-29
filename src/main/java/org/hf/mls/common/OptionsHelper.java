@@ -10,6 +10,8 @@ public class OptionsHelper {
 
     Map<String, String> optionsPairs = new HashMap<String, String>();
 
+    public static final String separatorChar = "--";
+
     public void setOptionsPairs(Map<String, String> optionsPairs) {
         this.optionsPairs = optionsPairs;
     }
@@ -22,7 +24,7 @@ public class OptionsHelper {
         if (0 == args.length % 2) {
             Map<String, String> optionsMap = new HashMap<String, String>();
             for (int i = 0; i < args.length; i += 2) {
-                if (!args[i].startsWith("--")) {
+                if (!args[i].startsWith(separatorChar)) {
                     setOptionsPairs(null);
                     return;
                 }

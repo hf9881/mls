@@ -35,7 +35,6 @@ public class SeqToTextJob extends Configured implements Tool {
         job.setJarByClass(SeqToTextJob.class);
 
         job.setInputFormatClass(SequenceFileInputFormat.class);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));

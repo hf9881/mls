@@ -20,7 +20,6 @@ public class ChangeVectorToIntJob {
         System.out.println("Change vector to int job started!");
         Configuration conf = new Configuration();
         conf.setInt("index", Integer.parseInt(args[4]));
-        //conf.setBoolean("ispref", args[4].equals("false"));
 
         Job job = new Job(conf, "CF_Change Vector_" + args[3]);
         job.setJarByClass(ChangeVectorToIntJob.class);
@@ -31,7 +30,6 @@ public class ChangeVectorToIntJob {
         if (JobOptions.COMPRESS.equals(args[5])) {
             FileOutputFormat.setCompressOutput(job, true);
             FileOutputFormat.setOutputCompressorClass(job, JobOptions.COMPRESS_CLASS);
-            //SequenceFileOutputFormat.setOutputCompressionType(job, SequenceFile.CompressionType.BLOCK);
         }
 
         job.setMapperClass(ChangeMapper.class);

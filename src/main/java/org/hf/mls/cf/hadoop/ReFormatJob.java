@@ -35,9 +35,6 @@ public class ReFormatJob {
         Job job = new Job(conf, "CF_Reformat_" + args[4]);
         job.setJarByClass(ReFormatJob.class);
 
-        //job.setInputFormatClass(SequenceFileInputFormat.class);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
-
         if (JobOptions.COMPRESS.equals(args[2])) {
             FileOutputFormat.setCompressOutput(job, true);
             FileOutputFormat.setOutputCompressorClass(job, JobOptions.COMPRESS_CLASS);
@@ -99,21 +96,18 @@ public class ReFormatJob {
                 }
                 newValue.append(value.toString().trim());
             }
-            //context.write(key, new Text(newValue.toString()));
 
             int itemLength = 0;
             int trainSetLength = 0;
             int testSetLength = 0;
             long Nr = 0;
             String[] items;
-            //StringBuilder trainSet = new StringBuilder(key.toString());
             StringBuilder testSet = new StringBuilder("");
 
             items = newValue.toString().split(",");
             itemLength = items.length;
             if (itemLength > 0) {
                 if (1 == itemLength) {
-                    //trainSet.append(",").append(items[0]);
                     mos.write("MOSText", key, new Text(items[0]), trainSetPath);
                 } else {
                     trainSetLength = (int) (itemLength * percent);
@@ -137,7 +131,6 @@ public class ReFormatJob {
                             }
                         }
                         if (isTrain) {
-                            //trainSet.append(",").append(items[i]);
                             mos.write("MOSText", key, new Text(items[i].toString()), trainSetPath);
                         } else {
                             isTrain = true;
@@ -145,9 +138,7 @@ public class ReFormatJob {
                     }
                     testSet = new StringBuilder("Nr").append(String.valueOf(Nr)).append(testSet);
                     mos.write("MOSSeq", key, new Text(testSet.toString()), testSetPath);
-                    //context.write(new Text("2@b"), new Text(testSet.toString()));
                 }
-                //context.write(new Text("1@a"), new Text(trainSet.toString()));
 
             }
         }

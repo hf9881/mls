@@ -40,3 +40,4 @@ Icon
 .idea/libraries/Maven__xmlpull_xmlpull_1_1_3_1.xml
 *.name
 *.xml
+*.class

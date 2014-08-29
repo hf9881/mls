@@ -30,8 +30,6 @@ public class EvaluateJob extends Configured implements Tool {
 
     @Override
     public int run(String[] args) throws Exception {
-
-
         Configuration conf = new Configuration();
 
         conf.setStrings("BatchId", args[2]);

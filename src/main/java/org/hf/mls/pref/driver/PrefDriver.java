@@ -1,11 +1,11 @@
 package org.hf.mls.pref.driver;
 
-import org.hf.mls.pref.hadoop.CalculatorJob;
+import org.hf.mls.pref.hadoop.PreferenceJob;
 
 public class PrefDriver {
 
     public static void main(String[] args) throws Throwable {
-        CalculatorJob.runJobs(args);
+        PreferenceJob.runJobs(args);
     }
 
 }

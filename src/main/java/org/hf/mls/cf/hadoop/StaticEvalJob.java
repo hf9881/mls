@@ -62,9 +62,9 @@ public class StaticEvalJob {
 
             String[] v = value.toString().split(",");
             StringBuilder newValue = new StringBuilder("");
-            //String precision = v[1];
-            //String recall = v[2];
-            //String f1 = v[3];
+            //precision = v[1];
+            //recall = v[2];
+            //f1 = v[3];
             newValue.append(v[1]).append(",").append(v[2]).append(",").append(v[3]);
 
             context.write(new Text(newKey), new Text(newValue.toString()));

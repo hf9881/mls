@@ -42,8 +42,6 @@ public class PreProcessJob extends Configured implements Tool {
         Job job = new Job(conf, "CF_Data pre_" + args[5]);
         job.setJarByClass(PreProcessJob.class);
 
-//        job.setInputFormatClass(SequenceFileInputFormat.class);
-//        job.setOutputFormatClass(SequenceFileOutputFormat.class);
         if (JobOptions.COMPRESS.equals(args[7])) {
             FileOutputFormat.setCompressOutput(job, true);
             FileOutputFormat.setOutputCompressorClass(job, JobOptions.COMPRESS_CLASS);

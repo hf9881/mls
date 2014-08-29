@@ -32,7 +32,6 @@ public class EvaluateJob {
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         job.setInputFormatClass(SequenceFileInputFormat.class);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         if (JobOptions.COMPRESS.equals(args[3])) {
             FileOutputFormat.setCompressOutput(job, true);

@@ -20,12 +20,18 @@ public abstract class AbstractJob {
     private static List<String> argListRequired = new ArrayList<String>();
     private static Map<String, String> argMapOptions;
 
-    protected AbstractJob() {
-    }
-
     protected static boolean parseArguments(String[] args) {
+        StringBuilder argsString;
+
+        if (0 == args.length) {
+            argsString = new StringBuilder("Usage: MainClassName");
+            for (String name : argMapDefault.keySet()) {
+                argsString.append(OptionsHelper.separatorChar).append(name).append("[] ");
+            }
+            LOGGER.error(argsString.toString());
+            return false;
+        }
         OptionsHelper optionHelper = new OptionsHelper(args);
-        StringBuilder argsString = new StringBuilder("Arguments: ");
 
         argMapOptions = optionHelper.getOptionsPairs();
         if (null == argMapOptions) {
@@ -39,13 +45,15 @@ public abstract class AbstractJob {
             }
         }
 
+        argsString = new StringBuilder("Arguments: ");
+
         for (String name : argMapOptions.keySet()) {
-            argsString.append("--").append(name).append("[").append(argMapOptions.get(name)).append("] ");
+            argsString.append(OptionsHelper.separatorChar).append(name).append("[").append(argMapOptions.get(name)).append("] ");
         }
 
-        for(String name :argMapDefault.keySet()){
-            if(!argMapOptions.containsKey(name)){
-                argsString.append("--").append(name).append("(").append(argMapDefault.get(name)).append(") ");
+        for (String name : argMapDefault.keySet()) {
+            if (!argMapOptions.containsKey(name)) {
+                argsString.append(OptionsHelper.separatorChar).append(name).append("(").append(argMapDefault.get(name)).append(") ");
             }
         }
         LOGGER.info(argsString.toString());
@@ -63,11 +71,11 @@ public abstract class AbstractJob {
         return argMapOptions.containsKey(name) ? argMapOptions.get(name) : argMapDefault.get(name);
     }
 
-    protected static void logJobSuccess(String jobName){
+    protected static void logJobSuccess(String jobName) {
         LOGGER.info(jobName + " Job success! ");
     }
 
-    protected static void logJobFailure(String jobName){
+    protected static void logJobFailure(String jobName) {
         LOGGER.error(jobName + " Job failed! ");
     }
 }

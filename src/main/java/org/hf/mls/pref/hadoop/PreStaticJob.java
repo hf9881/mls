@@ -27,6 +27,7 @@ public class PreStaticJob extends Configured implements Tool {
         return ToolRunner.run(new Configuration(), new PreStaticJob(), args);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int run(String[] args) throws Exception {
         Configuration conf = new Configuration();

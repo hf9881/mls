@@ -34,9 +34,6 @@ public class PreProcessJob extends Configured implements Tool {
         Job job = new Job(conf, "AR_Data pre_" + args[5]);
         job.setJarByClass(PreProcessJob.class);
 
-        //job.setInputFormatClass(SequenceFileInputFormat.class);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
-
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 

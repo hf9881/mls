@@ -47,10 +47,9 @@ public class StaticJob extends Configured implements Tool {
 
         SequenceFileOutputFormat.setOutputCompressionType(job, SequenceFile.CompressionType.BLOCK);
 
-        job.setMapperClass(StaticMapper.class);
         job.setReducerClass(StaticReducer.class);
 
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(Writable.class);
         job.setOutputValueClass(Text.class);
 
         boolean success = job.waitForCompletion(true);
@@ -61,21 +60,13 @@ public class StaticJob extends Configured implements Tool {
         }
     }
 
-    public static class StaticMapper extends Mapper<Writable, Writable, Text, Text> {
+    public static class StaticReducer extends Reducer<Writable, Writable, Writable, Text> {
 
         @Override
-        public void map(Writable key, Writable value, Context context) throws IOException, InterruptedException {
-            context.write(new Text(key.toString()), new Text(value.toString()));
-        }
-    }
-
-    public static class StaticReducer extends Reducer<Text, Text, Text, Text> {
-
-        @Override
-        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+        public void reduce(Writable key, Iterable<Writable> values, Context context) throws IOException, InterruptedException {
             String newValue = "";
 
-            for (Text value : values) {
+            for (Writable value : values) {
                 if ("".equals(newValue)) {
                     newValue = value.toString();
                 } else {

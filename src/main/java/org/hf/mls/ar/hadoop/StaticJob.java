@@ -38,7 +38,6 @@ public class StaticJob extends Configured implements Tool {
 
         job.setInputFormatClass(SequenceFileInputFormat.class);
 
-        job.setMapperClass(StaticMapper.class);
         job.setReducerClass(StaticReducer.class);
 
         job.setOutputKeyClass(Text.class);
@@ -52,18 +51,10 @@ public class StaticJob extends Configured implements Tool {
         }
     }
 
-    public static class StaticMapper extends Mapper<Writable, Writable, Text, Text> {
+    public static class StaticReducer extends Reducer<Writable, Writable, Text, Text> {
 
         @Override
-        public void map(Writable key, Writable value, Context context) throws IOException, InterruptedException {
-            context.write(new Text(key.toString()), new Text(value.toString()));
-        }
-    }
-
-    public static class StaticReducer extends Reducer<Text, Text, Text, Text> {
-
-        @Override
-        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+        public void reduce(Writable key, Iterable<Writable> values, Context context) throws IOException, InterruptedException {
             Configuration map_conf = context.getConfiguration();
             String batchId = map_conf.getStrings("BatchId", "")[0];
 
@@ -71,7 +62,7 @@ public class StaticJob extends Configured implements Tool {
             newKey.append("_01");
             StringBuilder newValue = new StringBuilder("");
 
-            for (Text value : values) {
+            for (Writable value : values) {
                 if (0 != newValue.length()) {
                     newValue.append(",");
                 }

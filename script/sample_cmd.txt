@@ -1,5 +1,5 @@
-﻿/home/hadoop/ar.sh --InputDir /test/hf/input --batchId a01 --userIndex  0  --itemIndex 3 --splitChar \\t
+﻿hadoop jar mls-1.0-SNAPSHOT-jar-with-dependencies.jar AR --inputDir /user/app/test --batchId a01 --userIndex  0  --itemIndex 3 --splitChar \\t  --tempDir tmp/
 
-/home/hadoop/cf.sh  --InputDir /test/hf/input --batchId c01  --userIndex 0 --itemIndex 3 --splitChar \\t --similarityClass SIMILARITY_COOCCURRENCE --numRecommendations 11 --maxSimilaritiesPerItem 80 --maxPrefsPerUserInItemSimilarity 500 --maxPrefsPerUser 500 --minPrefsPerUser 1 --threshold 0  --userIdNan true --itemIdNan true --trainPercent 0.6 --optLevel 0  --booleanData true --prefValueIndex 0
+hadoop jar mls-1.0-SNAPSHOT-jar-with-dependencies.jar CF --inputDir /user/app/test --batchId c01  --userIndex 0 --itemIndex 3 --splitChar \\t --similarityClass SIMILARITY_COOCCURRENCE --numRecommendations 11 --maxSimilaritiesPerItem 80 --maxPrefsPerUserInItemSimilarity 500 --maxPrefsPerUser 500 --minPrefsPerUser 1 --threshold 0  --userIdNan true --itemIdNan true --trainPercent 0.6 --optLevel 0  --booleanData true --prefValueIndex 0  --tempDir tmp/
 
-/home/hadoop/pref.sh --InputDir /test/hf/input  --batchId  p01 --userIndex 0 --itemIndex 1  --prefsIndexes 2-3-4 --splitChar \\t
+hadoop jar mls-1.0-SNAPSHOT-jar-with-dependencies.jar PREF --inputDir /user/app/test  --batchId  p01 --userIndex 0 --itemIndex 2  --prefsIndexes 4 --splitChar \\t --tempDir tmp/

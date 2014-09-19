@@ -1,4 +1,4 @@
-ï»¿package org.hf.mls.cf.hadoop;
+package org.hf.mls.cf.hadoop;
 
 import org.hf.mls.cf.driver.CfDriver;
 import org.hf.mls.cf.hadoop.change.ChangeVectorToIntJob;
@@ -51,8 +51,10 @@ public class CFItemBaseJob extends AbstractJob {
     private static final Logger LOGGER = LoggerFactory.getLogger(CfDriver.class);
 
     public static int runJobs(String[] args) throws Throwable {
-    	
-        addOption("InputDir", "", true);
+
+        String commandChar = "--";
+
+        addOption("inputDir", "", true);
         addOption("batchId", "-1", true);
         addOption("userIndex", "0", true);
         addOption("itemIndex", "1", true);
@@ -72,11 +74,11 @@ public class CFItemBaseJob extends AbstractJob {
         addOption("tempDir", "tmp/", false);
         addOption("optLevel", String.valueOf(JobOptions.OPTIMIZE), false);
 
-        if (!parseArguments(args, "--")) {
+        if (!parseArguments(args, commandChar)) {
             return -1;
         }
 
-        String inputDir = getOption("InputDir");
+        String inputDir = getOption("inputDir");
         String batchId = getOption("batchId");
         String userIndex = getOption("userIndex");
         String itemIndex = getOption("itemIndex");
@@ -387,7 +389,7 @@ public class CFItemBaseJob extends AbstractJob {
 
         //Pre static the cf evaluation data
         //Format Input:<u,Precision,Recall>
-        //Format Output:<batch_id + _01/02  P/R,ç”¨æˆ·æ•°>
+        //Format Output:<batch_id + _01/02  P/R,ÓÃ»§Êý>
         ControlledJob preStaticJob = new ControlledJob(new Configuration());
         preStaticJob.setJob(
                 StaticEvalJob.init(new String[]{

@@ -49,7 +49,7 @@ public class StaticJob extends Configured implements Tool {
 
         job.setReducerClass(StaticReducer.class);
 
-        job.setOutputKeyClass(Writable.class);
+        job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
         boolean success = job.waitForCompletion(true);
@@ -60,7 +60,7 @@ public class StaticJob extends Configured implements Tool {
         }
     }
 
-    public static class StaticReducer extends Reducer<Writable, Writable, Writable, Text> {
+    public static class StaticReducer extends Reducer<Writable, Writable, Text, Text> {
 
         @Override
         public void reduce(Writable key, Iterable<Writable> values, Context context) throws IOException, InterruptedException {
@@ -73,7 +73,7 @@ public class StaticJob extends Configured implements Tool {
                     newValue += "," + value.toString();
                 }
             }
-            context.write(key, new Text(newValue));
+            context.write(new Text(key.toString()), new Text(newValue));
         }
     }
 }

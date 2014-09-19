@@ -41,3 +41,6 @@ Icon
 *.name
 *.xml
 *.class
+*.log
+*.jar
+*.properties

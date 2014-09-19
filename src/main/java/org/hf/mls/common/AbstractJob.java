@@ -24,7 +24,7 @@ public abstract class AbstractJob {
         StringBuilder argsString;
 
         if (0 == args.length) {
-            argsString = new StringBuilder("Usage: MainClassName ");
+            argsString = new StringBuilder("Usage: Method ");
             for (String name : argMapDefault.keySet()) {
                 argsString.append(separatorChar).append(name).append("[] ");
             }

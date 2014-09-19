@@ -30,7 +30,9 @@ public class FPGrowthJob extends AbstractJob {
 
     public static int runJobs(String[] args) throws Throwable {
 
-        addOption("InputDir", "", true);
+        String commandChar = "--";
+
+        addOption("inputDir", "", true);
         addOption("batchId", "-1", true);
         addOption("userIndex", "0", true);
         addOption("itemIndex", "1", true);
@@ -39,11 +41,11 @@ public class FPGrowthJob extends AbstractJob {
         addOption("numGroups", "800", false);
         addOption("tempDir", "tmp/", true);
 
-        if (!parseArguments(args, "--")) {
+        if (!parseArguments(args, commandChar)) {
             return -1;
         }
 
-        String inputDir = getOption("InputDir");
+        String inputDir = getOption("inputDir");
         String batchId = getOption("batchId");
         String userIndex = getOption("userIndex");
         String itemIndex = getOption("itemIndex");
